@@ -1,0 +1,8 @@
+[  
+  {  
+    "origin": ["http://localhost:3001","http://localhost:3000","http://localhost:4200","https://registration.bytesplash.in","https://information.bytesplash.in","https://bytesplash.in","https://admin.bytesplash.in"],
+    "method": ["GET", "POST", "PUT", "DELETE"],  
+    "maxAge": 360000,  
+    "allowHeaders": ["Content-Type", "Authorization"]  
+  }  
+]

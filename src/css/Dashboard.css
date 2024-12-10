@@ -1,0 +1,552 @@
+/* // candidate-schedule.component.scss */
+:host {
+    display: block;
+    padding: 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .schedule-container {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  }
+  
+  /* // Date Picker Styles */
+  .date-picker-section {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    margin-bottom: 2rem;
+    border: 1px solid rgba(0, 113, 189, 0.1);
+    position: relative;
+  }
+  
+  .date-picker-section::after {
+    /* // content: '📅'; */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.25rem;
+    color: #0071bd;
+    pointer-events: none;
+  }
+
+  
+  .date-picker-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0071bd;
+  
+    .calendar-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  
+    h3 {
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+  
+  .date-input {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid rgba(0, 113, 189, 0.3);
+    border-radius: 0.375rem;
+    width: 200px;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+  
+    &:focus {
+      outline: none;
+      border-color: #0071bd;
+      box-shadow: 0 0 0 3px rgba(0, 113, 189, 0.2);
+    }
+  }
+  
+  /* // Grid Layout */
+  .candidates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* // Card Styles */
+  .candidate-card {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding: 1.5rem;
+    padding-top: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+  
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+  
+      .status-dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: #0071bd;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+  
+      h3 {
+        margin: 0;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1a1a1a;
+      }
+    }
+  }
+  
+  /* // Info Grid Styles */
+  .info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .info-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4b5563;
+  
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      color: #0071bd;
+      flex-shrink: 0;
+    }
+  
+    span {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
+  }
+  
+  /* // Assigned Section Styles */
+  .assigned-section {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+  
+    h4 {
+      margin: 0 0 0.75rem 0;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+    }
+  }
+  
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0071bd;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  
+    &:hover {
+      color: #005a94;
+      text-decoration: underline;
+    }
+  }
+  
+  /* // Animations */
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 113, 189, 0.7);
+    }
+    
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 10px rgba(0, 113, 189, 0);
+    }
+    
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 113, 189, 0);
+    }
+  }
+  
+  /* // Responsive Design */
+  @media (max-width: 768px) {
+    :host {
+      padding: 1rem;
+    }
+  
+    .candidates-grid {
+      grid-template-columns: 1fr;
+    }
+    input[type="date"]{
+        width: 90%;
+    }
+}
+
+.custom-date-input {
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the input */
+    font-size: 16px; /* Font size */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for border color and shadow */
+    width: auto; /* Full width */
+    background-color: #f9f9f9; /* Light background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.custom-date-input:focus {
+    border-color: #FF5722; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.5); /* Shadow on focus */
+}
+
+.navigation {  
+    background-color: #fff; /* Background color of the navigation bar */  
+    padding: 10px 20px; /* Padding */  
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow effect */  
+}  
+
+.navigation ul {  
+    display: flex; /* Display list items in a row */  
+    list-style-type: none; /* Remove bullet points */  
+    margin: 0; /* Remove default margin */  
+    padding: 0; /* Remove default padding */  
+}  
+
+.navigation li {  
+    margin-right: 20px; /* Spacing between menu items */  
+}  
+
+.navigation a {  
+    text-decoration: none; /* Remove underline from links */  
+    color: #4296FF; /* Text color */  
+    font-weight: bold; /* Bold font */  
+    padding: 10px; /* Padding for clickable area */  
+}  
+
+.navigation a:hover {  
+    color: #007BFF; /* Change color on hover */  
+}  
+
+.navigation .active {  
+    border-bottom: 0px solid #4296FF; /* Underline for active tab */  
+}
+
+/* Navigation Bar Styles */  
+.navigation {  
+    background-color: #ffffff; /* White background for clarity */  
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */  
+    padding: 15px 30px; /* Adequate padding for a spacious layout */  
+    border-radius: 8px; /* Rounded corners */  
+    margin-bottom: 20px; /* Space below the navigation */  
+    display: flex; /* Flex layout for easier alignment */  
+}  
+
+.nav-list {  
+    display: flex; /* Horizontal layout */  
+    list-style-type: none; /* Remove bullet points */  
+    padding: 0; /* Remove default padding */  
+    margin: 0; /* Remove default margin */  
+    width: 100%; /* Full width */  
+}  
+
+.nav-item {  
+    margin-right: 40px; /* Space between items */  
+}  
+
+.nav-item:last-child {  
+    margin-right: 0; /* Remove margin for the last item */  
+}  
+
+.nav-item a {  
+    text-decoration: none; /* Remove underline */  
+    color: #4296FF; /* Primary link color */  
+    font-size: 18px; /* Font size for readability */  
+    font-weight: bold; /* Bold text for emphasis */  
+    padding: 10px; /* Padding around link for click area */  
+    position: relative; /* Position relative for underline */  
+    transition: color 0.3s; /* Smooth color transition */  
+}  
+
+.nav-item a:hover {  
+    color: #007BFF; /* Change color on hover */  
+}  
+
+/* Active State for Link */  
+.nav-item a.active {  
+    color: #007BFF; /* Color for active tab */  
+}  
+
+.nav-item a.active::after {  
+    content: ''; /* Invisible content for underline */  
+    display: block; /* Block for the underline effect */  
+    width: 100%; /* Full width of the link */  
+    height: 4px; /* Underline height */  
+    background-color: #4296FF; /* Underline color */  
+    position: absolute; /* Position right below the link */  
+    bottom: -8px; /* Space below the link */  
+    left: 0; /* Align to the left */  
+    transition: all 0.3s; /* Smooth transition for underline */  
+}
+
+/* Add this to your existing CSS file */
+.nav-link {
+    color: gray; /* Secondary color */
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s; /* Animation for hover effect */
+}
+
+.nav-link:hover {
+   /* Primary color on hover */
+    color: white; /* Change text color on hover */
+}
+
+
+/* src/app/dashboard/dashboard.component.css */
+
+/* Navigation Bar Styles */
+.navigation {
+    background-color: #f8f9fa; /* Light background for the nav */
+    border-bottom: 0px solid #4296FF; /* Bottom border for emphasis */
+    padding: 10px 20px; /* Padding for spacing */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.nav-list {
+    display: flex; /* Flexbox for horizontal layout */
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+}
+
+.nav-item {
+    margin-right: 20px; /* Space between nav items */
+}
+
+.nav-link {
+    text-decoration: none; /* Remove underline */
+    color: #152C70; /* Text color */
+    font-weight: bold; /* Bold text */
+    transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.nav-link:hover {
+    color: #4296FF; /* Change color on hover */
+}
+
+@media (max-width: 768px) {
+    .responsive-nav-date-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .navigation {
+        width: 80%;
+        text-align: center;
+    }
+    .nav-list {
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+    .nav-item {
+        flex: 1;
+    }
+    .date-picker-header {
+        text-align: center;
+    }
+    .date-input {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+.logout-button:hover,  svg :hover {
+    cursor: pointer;
+}
+
+@keyframes rotate360 {
+    100%{ transform: rotate(350deg);}
+  }
+  
+  .timeslot-icon{
+    animation: rotate360 5s linear infinite !important;
+  }
+  
+  /* Add this CSS to your styles */
+  .rotate-icon {
+    animation: rotate 10s linear infinite; /* Adjust duration as needed */
+  }
+
+  @keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(3650deg);
+    }
+  }
+  
+
+@keyframes scaleup {
+    0%{ transform: scale(1.0);}
+    50%{ transform: scale(1.1);}
+    100% {transform: scale(1.0);}
+    
+}
+.animated-icon {
+   animation: scaleup 2s ease-in-out infinite;
+}
+.icon-outline {
+    transition: stroke 0.3s ease;
+}
+.icon-outline:hover {
+    stroke: #0056a1; /* Change to a darker shade on hover */
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 0); }
+    25% { transform: translate(-1px, 0); }
+    50% { transform: translate(1px, 0); }
+    75% { transform: translate(-1px, 0); }
+    100% { transform: translate(0, 0); }
+}
+
+.shake-animation {
+    animation: shake 3s ease-in-out infinite;
+}
+
+.welcome-container {
+    text-align: center; /* Center the text */
+    margin: 20px 0; /* Add some margin */
+}
+
+.welcome-message {
+    font-size: 24px; /* Larger font size for the welcome message */
+    font-weight: bold; /* Bold text */
+}
+
+.user-email {
+    font-size: 18px; /* Slightly smaller font size for the email */
+    color: #0071bd; /* Change color to match the theme */
+}
+
+/* Add this to your CSS file */
+.welcome-container {
+    background-color: #0071bd;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center; /* Center the text */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.animated-welcome {
+    animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+.welcome-message {
+    font-size: 24px; /* Increase font size */
+    font-weight: bold; /* Make it bold */
+    animation: bounce 2s infinite; /* Bounce animation */
+}
+
+.user-email {
+    color: #d3d3d3;
+    font-size: 16px; /* Adjust font size */
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+ 
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.logout-btn-svg{
+    right:0;
+    /* // position: absolute; */
+    top: 0;
+    /* // margin-right: 10px; */
+    margin-top: -30px;
+    vertical-align: middle;
+}
+
+input[list="resources"]{
+    width: 200px;
+}
+a:hover{
+  cursor: pointer;
+}
+/* Add this CSS to your styles */
+.candidate-card {
+  cursor: pointer; /* Change cursor to pointer for clickable area */
+}
+
+/* // ... existing code ... */
+.expand-icon {
+  margin-left: auto; /* Align icon to the right */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* Smooth transition for rotation and opacity */
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg); /* Rotate icon when expanded */
+  opacity: 1; /* Ensure the icon is fully visible when expanded */
+}
+.info-grid {
+  padding: 10px; /* Add padding for expanded content */
+  background-color: #f9f9f9; /* Light background for expanded section */
+  border: 1px solid #e0e0e0; /* Border for better visibility */
+  border-radius: 5px; /* Rounded corners */
+}
+svg:hover{
+  cursor: pointer;
+}
+
+.expand-icon:hover{
+  cursor: pointer;
+}
+
+.db-container{
+  /* background-color: rgb(86, 83, 83) !important; */
+}
+.db-header-container{
+  padding:0.5rem;
+}
+
+svg{
+  vertical-align: middle;
+}

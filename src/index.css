@@ -1,0 +1,649 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:host {
+    --bright-blue: oklch(51.01% 0.274 263.83);
+    --electric-violet: oklch(53.18% 0.28 296.97);
+    --french-violet: oklch(47.66% 0.246 305.88);
+    --vivid-pink: oklch(69.02% 0.277 332.77);
+    --hot-red: oklch(61.42% 0.238 15.34);
+    --orange-red: oklch(63.32% 0.24 31.68);
+
+    --gray-900: oklch(19.37% 0.006 300.98);
+    --gray-700: oklch(36.98% 0.014 302.71);
+    --gray-400: oklch(70.9% 0.015 304.04);
+
+    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+      180deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+      90deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --pill-accent: var(--bright-blue);
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  
+.logo{
+  width: 400px;
+  height: 10%;
+  text-align: center;
+}
+
+.logo-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.divider {
+    width: 1px;
+    background: var(--red-to-pink-to-purple-vertical-gradient);
+    margin-inline: 0.5rem;
+  }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    --pill-accent: var(--bright-blue);
+    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+    color: var(--pill-accent);
+    padding-inline: 0.75rem;
+    padding-block: 0.375rem;
+    border-radius: 2.75rem;
+    border: 0;
+    transition: background 0.3s ease;
+    font-family: var(--inter-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem;
+    letter-spacing: -0.00875rem;
+    text-decoration: none;
+  }
+
+  .pill:hover {
+    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
+  }
+
+  .pill-group .pill:nth-child(6n + 1) {
+    --pill-accent: var(--bright-blue);
+  }
+  .pill-group .pill:nth-child(6n + 2) {
+    --pill-accent: var(--french-violet);
+  }
+  .pill-group .pill:nth-child(6n + 3),
+  .pill-group .pill:nth-child(6n + 4),
+  .pill-group .pill:nth-child(6n + 5) {
+    --pill-accent: var(--hot-red);
+  }
+
+  .pill-group svg {
+    margin-inline-start: 0.25rem;
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.73rem;
+    margin-top: 1.5rem;
+  }
+
+  .social-links path {
+    transition: fill 0.3s ease;
+    fill: var(--gray-400);
+  }
+
+  .social-links a:hover svg path {
+    fill: var(--gray-900);
+  }
+
+  h1,p,a,button {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  }
+
+  *{
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  }
+
+
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #353333;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+input {
+    width: 80%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    height: 0.7rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2596be;
+    box-shadow: 0 0 0 4px rgba(0, 113, 189, 0.1);
+}
+
+button {
+    background: #2596be;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+button:hover {
+    background: rgb(12, 109, 173);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 113, 189, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 113, 189, 0.2);
+}
+
+
+.error-message{
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgb(155, 7, 7);
+}
+
+.btn-disabled{
+  background-color: rgb(220, 212, 212);
+  color:white;
+}
+
+@keyframes rotate360 {
+  100%{ transform: rotate(360deg);}
+}
+
+.timeslot-icon{
+  animation: rotate360 5s linear infinite;
+}
+
+a[href^="tel:"]{
+  text-decoration: none;
+  color:#0071bd;
+}
+
+
+/* Add this to your CSS file */
+.hover-animate {
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.hover-animate:hover {
+  transform: scale(1.1); /* Scale up the icon */
+  fill: #0056b3; /* Change color on hover */
+}
+
+
+.welcome-container {
+  text-align: center; /* Center the text */
+  margin: 20px 0; /* Add some margin */
+}
+
+.welcome-message {
+  font-size: 24px; /* Larger font size for the welcome message */
+  font-weight: bold; /* Bold text */
+}
+
+.user-email {
+  font-size: 18px; /* Slightly smaller font size for the email */
+  color: #0071bd; /* Change color to match the theme */
+}
+
+/* Add this to your CSS file */
+.welcome-container {
+  background-color: #0071bd;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center; /* Center the text */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.animated-welcome {
+  animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+.welcome-message {
+  font-size: 24px; /* Increase font size */
+  font-weight: bold; /* Make it bold */
+  animation: bounce 2s infinite; /* Bounce animation */
+}
+
+.user-email {
+  color: #d3d3d3;
+  font-size: 16px; /* Adjust font size */
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+  }
+  40% {
+      transform: translateY(-10px);
+  }
+  60% {
+      transform: translateY(-5px);
+  }
+}
+
+
+/*Login Page CSS*/
+/* You can add global styles to this file, and also import other style files */
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nanum+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:host {
+    --bright-blue: oklch(51.01% 0.274 263.83);
+    --electric-violet: oklch(53.18% 0.28 296.97);
+    --french-violet: oklch(47.66% 0.246 305.88);
+    --vivid-pink: oklch(69.02% 0.277 332.77);
+    --hot-red: oklch(61.42% 0.238 15.34);
+    --orange-red: oklch(63.32% 0.24 31.68);
+
+    --gray-900: oklch(19.37% 0.006 300.98);
+    --gray-700: oklch(36.98% 0.014 302.71);
+    --gray-400: oklch(70.9% 0.015 304.04);
+
+    --red-to-pink-to-purple-vertical-gradient: linear-gradient(
+      180deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --red-to-pink-to-purple-horizontal-gradient: linear-gradient(
+      90deg,
+      var(--orange-red) 0%,
+      var(--vivid-pink) 50%,
+      var(--electric-violet) 100%
+    );
+
+    --pill-accent: var(--bright-blue);
+
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  
+.logo{
+  width: 400px;
+  height: 10%;
+  text-align: center;
+}
+
+.logo-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.divider {
+    width: 1px;
+    background: var(--red-to-pink-to-purple-vertical-gradient);
+    margin-inline: 0.5rem;
+  }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    --pill-accent: var(--bright-blue);
+    background: color-mix(in srgb, var(--pill-accent) 5%, transparent);
+    color: var(--pill-accent);
+    padding-inline: 0.75rem;
+    padding-block: 0.375rem;
+    border-radius: 2.75rem;
+    border: 0;
+    transition: background 0.3s ease;
+    font-family: var(--inter-font);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.4rem;
+    letter-spacing: -0.00875rem;
+    text-decoration: none;
+  }
+
+  .pill:hover {
+    background: color-mix(in srgb, var(--pill-accent) 15%, transparent);
+  }
+
+  .pill-group .pill:nth-child(6n + 1) {
+    --pill-accent: var(--bright-blue);
+  }
+  .pill-group .pill:nth-child(6n + 2) {
+    --pill-accent: var(--french-violet);
+  }
+  .pill-group .pill:nth-child(6n + 3),
+  .pill-group .pill:nth-child(6n + 4),
+  .pill-group .pill:nth-child(6n + 5) {
+    --pill-accent: var(--hot-red);
+  }
+
+  .pill-group svg {
+    margin-inline-start: 0.25rem;
+  }
+
+  .social-links {
+    display: flex;
+    align-items: center;
+    gap: 0.73rem;
+    margin-top: 1.5rem;
+  }
+
+  .social-links path {
+    transition: fill 0.3s ease;
+    fill: var(--gray-400);
+  }
+
+  .social-links a:hover svg path {
+    fill: var(--gray-900);
+  }
+
+  h1,p,a,button {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  }
+
+  *{
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  }
+
+
+  .form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #353333;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+input {
+    width: 80%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    height: 0.7rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #2596be;
+    box-shadow: 0 0 0 4px rgba(0, 113, 189, 0.1);
+}
+
+button {
+    background: #2596be;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+button:hover {
+    background: rgb(12, 109, 173);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 113, 189, 0.2);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 113, 189, 0.2);
+}
+
+
+.error-message{
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: rgb(155, 7, 7);
+}
+
+.btn-disabled{
+  background-color: rgb(220, 212, 212);
+  color:white;
+}
+
+@keyframes rotate360 {
+  100%{ transform: rotate(360deg);}
+}
+
+.timeslot-icon{
+  animation: rotate360 5s linear infinite;
+}
+
+a[href^="tel:"]{
+  text-decoration: none;
+  color:#0071bd;
+}
+
+
+/* Add this to your CSS file */
+.hover-animate {
+  transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.hover-animate:hover {
+  transform: scale(1.1); /* Scale up the icon */
+  fill: #0056b3; /* Change color on hover */
+}
+
+
+.welcome-container {
+  text-align: center; /* Center the text */
+  margin: 20px 0; /* Add some margin */
+}
+
+.welcome-message {
+  font-size: 24px; /* Larger font size for the welcome message */
+  font-weight: bold; /* Bold text */
+}
+
+.user-email {
+  font-size: 18px; /* Slightly smaller font size for the email */
+  color: #0071bd; /* Change color to match the theme */
+}
+
+/* Add this to your CSS file */
+.welcome-container {
+  background-color: #0071bd;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center; /* Center the text */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.animated-welcome {
+  animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+.welcome-message {
+  font-size: 24px; /* Increase font size */
+  font-weight: bold; /* Make it bold */
+  animation: bounce 2s infinite; /* Bounce animation */
+}
+
+.user-email {
+  color: #d3d3d3;
+  font-size: 16px; /* Adjust font size */
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+      transform: translateY(0);
+  }
+  40% {
+      transform: translateY(-10px);
+  }
+  60% {
+      transform: translateY(-5px);
+  }
+}
+
+body{
+  margin:2rem;
+}
+
+
+  button:hover{
+    background-color: #0071bd;
+    color:white;
+  }
+
+  :not(.filter-button-active){
+    color: #0071bd !important;
+    background-color: white !important;
+    border: 2px solid 0071bd !important;
+  }
+
+
+  
+
+.contact-info  b{
+  /* background-color: rgba(128, 128, 128, 0.294) !important; */
+  padding:0.2rem 0.5rem !important;
+  border-radius: 0.5rem !important;
+  color:black !important;
+}
+.contact-info a {
+  background-color: rgba(128, 128, 128, 0.294) !important;
+  padding:0.2rem 0.5rem !important;
+  border-radius: 0.5rem !important;
+  color:black !important;
+}
+.exp-info b{
+    background-color: rgb(6, 92, 63) !important;
+    color:white !important;
+    padding:0.2rem 0.5rem !important;
+    border-radius: 0.5rem !important;
+}
+.technology-info{
+  background-color: rgb(107, 7, 68) !important;
+  color:white !important;
+  padding:0.2rem 0.5rem !important;
+  border-radius: 0.5rem !important;
+}
+.selected-info{
+  background-color: #0071bd !important;
+  padding:0.2rem 0.5rem !important;
+  font-size: small;
+  border-radius: 0.5rem !important;
+  color:white !important;
+}
+.resume-download{
+  font-weight: 600;
+  cursor: pointer;
+}
+.payment-info{
+  font-weight: 700;
+  color: rgb(53, 52, 52);
+}
+.candidate-card p {
+  margin-top: 0.5rem;
+}
