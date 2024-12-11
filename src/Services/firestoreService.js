@@ -23,15 +23,28 @@ export const fetchCandidates = async () => {
   }
 };
 
-// Update a candidate by ID
+
+// Inserting Data into the Form
+
 export const updateCandidate = async (id, data) => {
-  try {
-    await updateDoc(doc(db, "BDProfiles", id), data);
-    console.log("Candidate updated successfully");
-  } catch (error) {
-    console.error("Error updating candidate:", error);
-  }
-};
+    try {
+      await updateDoc(doc(db, "BDProfiles", id), data);
+      console.log("Candidate updated successfully");
+    } catch (error) {
+      console.error("Error updating candidate:", error);
+    }
+  };
+
+
+// Update a candidate by ID
+// export const updateCandidate = async (id, data) => {
+//   try {
+//     await updateDoc(doc(db, "BDProfiles", id), data);
+//     console.log("Candidate updated successfully");
+//   } catch (error) {
+//     console.error("Error updating candidate:", error);
+//   }
+// };
 
 // Delete a candidate by ID
 export const deleteCandidate = async (id) => {

@@ -213,7 +213,8 @@ function Dashboard({ candidates }) {
             <LogoutIcon
               className="logout-icon float-right"
               onClick={logOut}
-            />{" "}
+            />
+            {" "}
             {/* Added logout icon */}
           </div>
           <div className="flex justify-between items-center flex-container-buttons">
@@ -248,7 +249,8 @@ function Dashboard({ candidates }) {
               Payed
             </button>
 
-            <button> <Link to="/registerForm" style={{textDecoration:"none"}} > Event Registrarion  </Link></button>
+            <button disabled={true} style={{ cursor: 'not-allowed' }}
+  onClick={(e) => e.preventDefault()}> <Link to="/registerForm" style={{ textDecoration: "none", pointerEvents: 'none' }} > Event </Link></button>
 
             <button> <Link to="/studentsData" style={{textDecoration:"none"}} >  Registered Students </Link> </button>
           </div>

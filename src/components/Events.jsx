@@ -1,7 +1,8 @@
 // src/RegisterForm.js
 import React, { useState } from 'react';
-import { database } from '../firebase';  // Import Firebase database functions
-import { ref, set } from 'firebase/database'; // Import functions for database reference and set data
+import { db } from '../firebase';  // Import Firestore instance
+import { collection, addDoc } from 'firebase/firestore';  // Import functions for Firestore
+import Dashboard from './Dashboard';
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -26,17 +27,11 @@ const RegisterForm = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Sanitize the email to remove invalid characters for Firebase paths
-    const sanitizedEmail = formData.email.replace(/[.#$[\]]/g, "_");
-
-    // Get reference to the database node for this user
-    const userRef = ref(database, 'users/' + sanitizedEmail);  // Use sanitized email as path
-
-    // Write user data to Firebase Realtime Database
-    set(userRef, {
+    // Create a new candidate data object to be saved in Firestore
+    const candidateData = {
       name: formData.name,
       email: formData.email,
       password: formData.password,
@@ -46,28 +41,33 @@ const RegisterForm = () => {
       graduation: formData.graduation,
       stream: formData.stream,
       yearPassedOut: formData.yearPassedOut,
-    })
-      .then(() => {
-        alert('User registered successfully!');
-        setFormData({
-          name: '',
-          email: '',
-          password: '',
-          gender: '',
-          mobile: '',
-          collegeName: '',
-          graduation: '',
-          stream: '',
-          yearPassedOut: '',
-        });
-      })
-      .catch((error) => {
-        alert('Error registering user: ' + error.message);
+    };
+
+    try {
+      // Add candidate data to Firestore under the 'candidates' collection
+      const docRef = await addDoc(collection(db, 'candidates'), candidateData);
+      alert('User registered successfully!');
+
+      // Reset form data after successful registration
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        gender: '',
+        mobile: '',
+        collegeName: '',
+        graduation: '',
+        stream: '',
+        yearPassedOut: '',
       });
+    } catch (error) {
+      alert('Error registering user: ' + error.message);
+    }
   };
 
   return (
     <div className="register-form">
+      <Dashboard />
       <h2>Internship Registration Form</h2>
       <form onSubmit={handleSubmit}>
         {/* Name */}

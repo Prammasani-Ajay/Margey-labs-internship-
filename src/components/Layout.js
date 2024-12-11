@@ -15,7 +15,7 @@ const Layout = () => {
                     <Route path="/" exact element={<Login />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/dashboard" element={<Dashboard />} />
-                    <Route path="/RegisterForm" element={<RegisterForm />} />
+                    {/* <Route path="/RegisterForm" element={<RegisterForm />} /> */}
                     <Route path="/studentsData" element={<CandidateManager />} />
                     {/* Add more routes as needed */}
                 </Routes>
