@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchCandidates } from "../Services/firestoreService"; // Import function to fetch candidates
+import * as XLSX from 'xlsx'; // Import XLSX for exporting to Excel
+import { fetchCandidates } from "../Services/firestoreService";
 import Dashboard from './Dashboard';
 
 const CandidateManager = () => {
@@ -14,7 +15,6 @@ const CandidateManager = () => {
     mobile: '',
   });
 
-  // Track visibility of filter inputs
   const [filterVisibility, setFilterVisibility] = useState({
     name: false,
     college: false,
@@ -28,9 +28,8 @@ const CandidateManager = () => {
   useEffect(() => {
     const loadCandidates = async () => {
       try {
-        const data = await fetchCandidates(); // Fetch candidates data from Firestore
-        console.log("Fetched candidates:", data); // Log data to check if it is correct
-        setCandidates(data); // Update the state with the fetched data
+        const data = await fetchCandidates();
+        setCandidates(data);
       } catch (error) {
         console.error("Error fetching candidates:", error);
       }
@@ -38,18 +37,15 @@ const CandidateManager = () => {
     loadCandidates();
   }, []);
 
-  // Handle filter change
   const handleFilterChange = (e, column) => {
     const value = e.target.value.toLowerCase();
     setFilters(prev => ({ ...prev, [column]: value }));
   };
 
-  // Toggle visibility of the input field for a column
   const toggleFilterInput = (column) => {
     setFilterVisibility(prev => ({ ...prev, [column]: !prev[column] }));
   };
 
-  // Filter candidates based on the current filter state
   const filteredCandidates = candidates.filter(candidate => {
     return (
       candidate.studentsName.toLowerCase().includes(filters.name) &&
@@ -62,218 +58,67 @@ const CandidateManager = () => {
     );
   });
 
+  // Export table data to Excel
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(filteredCandidates.map((candidate, index) => ({
+      'S.No': index + 1,
+      'Name': candidate.studentsName,
+      'College': candidate.collegeName,
+      'Gender': candidate.gender,
+      'Year of Graduation': candidate.yearOfPassedOut,
+      'Course': candidate.course,
+      'Email': candidate.emailId,
+      'Mobile': candidate.mobileNumber,
+    })));
+
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Candidates');
+    XLSX.writeFile(workbook, 'Candidates.xlsx');
+  };
+
   return (
     <div>
       <Dashboard />
-      <center> <h3> Registered Candidates </h3> </center>
-      <div style={{ maxHeight: '35rem', overflowY: 'auto', padding: 5 , width: '90%', margin: 'auto'}}>
+      <center><h3>Registered Candidates</h3></center>
+      <div style={{ maxHeight: '35rem', overflowY: 'auto', padding: 5, width: '90%', margin: 'auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+          <button className="btn btn-primary" onClick={exportToExcel}>Export to Excel</button>
+        </div>
         <table className="table table-striped">
           <thead>
             <tr>
               <th scope="col">S.No</th>
-              <th scope="col">
-                <span style={{ color: 'black' }}>Name</span>
-                <svg
-                  onClick={() => toggleFilterInput('name')}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                  style={{ cursor: 'pointer', marginLeft: '25px' }} // Increased margin for spacing
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
-                    <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
-                    <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
-                    <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
-                  </g>
-                </svg>
-                {filterVisibility.name && (
-                  <input
-                    type="text"
-                    value={filters.name}
-                    onChange={(e) => handleFilterChange(e, 'name')}
-                    placeholder="Filter"
-                    className="form-control form-control-sm"
-                    style={{ marginTop: '5px' }}
-                  />
-                )}
-              </th>
-              <th scope="col">
-                <span style={{ color: 'black' }}>College</span>
-                <svg
-                  onClick={() => toggleFilterInput('college')}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                  style={{ cursor: 'pointer', marginLeft: '25px' }} // Increased margin for spacing
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
-                    <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
-                    <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
-                    <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
-                  </g>
-                </svg>
-                {filterVisibility.college && (
-                  <input
-                    type="text"
-                    value={filters.college}
-                    onChange={(e) => handleFilterChange(e, 'college')}
-                    placeholder="Filter"
-                    className="form-control form-control-sm"
-                    style={{ marginTop: '5px' }}
-                  />
-                )}
-              </th>
-              <th scope="col">
-                <span style={{ color: 'black' }}>Gender</span>
-                <svg
-                  onClick={() => toggleFilterInput('gender')}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                  style={{ cursor: 'pointer', marginLeft: '25px' }} // Increased margin for spacing
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
-                    <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
-                    <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
-                    <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
-                  </g>
-                </svg>
-                {filterVisibility.gender && (
-                  <input
-                    type="text"
-                    value={filters.gender}
-                    onChange={(e) => handleFilterChange(e, 'gender')}
-                    placeholder="Filter"
-                    className="form-control form-control-sm"
-                    style={{ marginTop: '5px' }}
-                  />
-                )}
-              </th>
-              <th scope="col">
-                <span style={{ color: 'black' }}>Year of Graduation</span>
-                <svg
-                  onClick={() => toggleFilterInput('graduationYear')}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                  style={{ cursor: 'pointer', marginLeft: '25px' }} // Increased margin for spacing
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
-                    <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
-                    <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
-                    <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
-                  </g>
-                </svg>
-                {filterVisibility.graduationYear && (
-                  <input
-                    type="text"
-                    value={filters.graduationYear}
-                    onChange={(e) => handleFilterChange(e, 'graduationYear')}
-                    placeholder="Filter"
-                    className="form-control form-control-sm"
-                    style={{ marginTop: '5px' }}
-                  />
-                )}
-              </th>
-              <th scope="col">
-                <span style={{ color: 'black' }}>Course</span>
-                <svg
-                  onClick={() => toggleFilterInput('course')}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                  style={{ cursor: 'pointer', marginLeft: '25px' }} // Increased margin for spacing
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
-                    <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
-                    <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
-                    <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
-                  </g>
-                </svg>
-                {filterVisibility.course && (
-                  <input
-                    type="text"
-                    value={filters.course}
-                    onChange={(e) => handleFilterChange(e, 'course')}
-                    placeholder="Filter"
-                    className="form-control form-control-sm"
-                    style={{ marginTop: '5px' }}
-                  />
-                )}
-              </th>
-              <th scope="col">
-                <span style={{ color: 'black' }}>Email</span>
-                <svg
-                  onClick={() => toggleFilterInput('email')}
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                  style={{ cursor: 'pointer', marginLeft: '25px' }} // Increased margin for spacing
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
-                    <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
-                    <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
-                    <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
-                  </g>
-                </svg>
-                {filterVisibility.email && (
-                  <input
-                    type="text"
-                    value={filters.email}
-                    onChange={(e) => handleFilterChange(e, 'email')}
-                    placeholder="Filter"
-                    className="form-control form-control-sm"
-                    style={{ marginTop: '5px' }}
-                  />
-                )}
-              </th>
-              <th scope="col">
-                <span style={{ color: 'black' }}>Mobile</span>
-                <svg
-                  onClick={() => toggleFilterInput('mobile')}
-                  viewBox="0 0 16 16"
-                  fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  style={{ cursor: 'pointer', marginLeft: '25px', color: '#0071bd' }} // Increased margin for spacing
-                >
-                  <g id="SVGRepo_iconCarrier">
-                    <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
-                    <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
-                    <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
-                    <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
-                  </g>
-                </svg>
-                {filterVisibility.mobile && (
-                  <input
-                    type="text"
-                    value={filters.mobile}
-                    onChange={(e) => handleFilterChange(e, 'mobile')}
-                    placeholder="Filter"
-                    className="form-control form-control-sm"
-                    style={{ marginTop: '5px' }}
-                  />
-                )}
-              </th>
+              {['name', 'college', 'gender', 'graduationYear', 'course', 'email', 'mobile'].map((column, index) => (
+                <th scope="col" key={index}>
+                  <span style={{ color: 'black' }}>{column.charAt(0).toUpperCase() + column.slice(1)}</span>
+                  <svg
+                    onClick={() => toggleFilterInput(column)}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                    style={{ cursor: 'pointer', marginLeft: '25px' }}
+                  >
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M0 3H16V1H0V3Z" fill="#0071bd"></path>
+                      <path d="M2 7H14V5H2V7Z" fill="#0071bd"></path>
+                      <path d="M4 11H12V9H4V11Z" fill="#0071bd"></path>
+                      <path d="M10 15H6V13H10V15Z" fill="#0071bd"></path>
+                    </g>
+                  </svg>
+                  {filterVisibility[column] && (
+                    <input
+                      type="text"
+                      value={filters[column]}
+                      onChange={(e) => handleFilterChange(e, column)}
+                      placeholder={`Filter ${column}`}
+                      className="form-control form-control-sm"
+                      style={{ marginTop: '5px' }}
+                    />
+                  )}
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
